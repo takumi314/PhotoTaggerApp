@@ -6,7 +6,7 @@ target 'PhotoTaggerApp' do
   use_frameworks!
 
   # Pods for PhotoTaggerApp
-  pod 'Alamofire', '~> 4.2.0'
+  pod 'Alamofire', '~> 4.3.0'
   
   target 'PhotoTaggerAppTests' do
     inherit! :search_paths
