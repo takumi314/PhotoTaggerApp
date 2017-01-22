@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
@@ -23,3 +24,30 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController {
+
+    // Networking calls
+    func upload(image: UIImage,
+                progressCompletion: @escaping (_ percent: Float) -> Void,
+                completion: @escaping (_ tags: [String], _ colors: [UIColor]) -> Void) {
+        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {
+            print("Could not get JPEG representation of UIImage")
+            return
+        }
+        // statement
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData,
+                                         withName: "imagefile",
+                                         fileName: "image.jpg",
+                                         mimeType: "image/jpeg")
+        },
+            to: "http://api.imagga.com/v1/content",
+            headers: ["Authorization": "Basic YWNjX2I5MWQ5NzBlNTk0NzQ1MTo4NDk1MDdjYzk3MGI4NjlmMDgwOWFjYTFlZDBhOTZlNw=="],
+            encodingCompletion: { encodingResult in
+        }
+        )
+        return
+    }
+
+}
