@@ -31,7 +31,7 @@ extension ViewController {
                 progressCompletion: @escaping (_ percent: Float) -> Void,
                 completion: @escaping (_ tags: [String], _ colors: [UIColor]) -> Void) {
         guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {
-            print("Could not get JPEG representation of UIImage")
+            print(image_data_failure_JPEG_representation)
             return
         }
         // statement
@@ -42,12 +42,11 @@ extension ViewController {
                                          fileName: "image.jpg",
                                          mimeType: "image/jpeg")
         },
-            to: "http://api.imagga.com/v1/content",
-            headers: ["Authorization": "Basic YWNjX2I5MWQ5NzBlNTk0NzQ1MTo4NDk1MDdjYzk3MGI4NjlmMDgwOWFjYTFlZDBhOTZlNw=="],
+            to: imagga_URL_content,
+            headers: ["Authorization": headers_imagga_Authorization],
             encodingCompletion: { encodingResult in
         }
         )
-        return
     }
 
 }
