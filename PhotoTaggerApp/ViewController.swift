@@ -79,13 +79,106 @@ extension ViewController {
                         // 3.Call the completion handler to update the UI. 
                         // At this point, you don’t have any downloaded tags or colors,
                         // so simply call this with empty data.
-                        completion([String](), [UIColor]())
+                        self.downloadTags(contentID: firstFileID) { tags in
+                            self.downloadColors(contentID: firstFileID) { colors in
+                                completion(tags, colors)
+                            }
+//                            completion(tags, [UIColor]())
+                        }
                     }
                 case .failure(let encodingError):
                     print(encodingError)
                 }
         }
         )
+    }
+
+    func downloadTags(contentID: String, completion: @escaping ([String]) -> Void) {
+        Alamofire
+            .request(imagga_URL_tagging,
+                     method: .get,
+                     parameters: ["content": contentID],
+                     headers: ["Authorizzation": headers_imagga_Authorization]
+        )
+        .responseJSON { response in
+            // 1. Check if the response was successful; if not, print the error and call the completion handler.
+            guard response.result.isSuccess else {
+                print("Error while fetching tags: \(response.result.error)")
+                completion([String]())
+                return
+            }
+            // 2. Check each portion of the response, verifying the expected type is the actual type received.
+            // Retrieve the tagsAndConfidences information from the response. If tagsAndConfidences cannot be resolved, 
+            // print out an error message and call the completion handler.
+            guard
+                let responseJSON = response.result.value as? [String: Any],
+                let results = responseJSON["result"] as? [[String: Any]],
+                let firstObject = results.first,
+                let tagsAndConfidences = firstObject["tags"] as? [[String: Any]] else {
+                print("Invalid tag information received from the service")
+                completion([String]())
+                return
+            }
+
+            // 3. Iterate over each dictionary object in the tagsAndConfidences array, 
+            // retrieving the value associated with the tag key.
+            let tags = tagsAndConfidences.flatMap({ dict in
+                return dict["tags"] as? String
+            })
+
+            // 4. Call the completion handler passing in the tags received from the service.
+            completion(tags)
+        }
+    }
+
+    func downloadColors(contentID: String, completion: @escaping ([UIColor]) -> Void) {
+        Alamofire.request(imagga_URL_colors,
+                          method: .get,
+                          parameters: ["content": contentID],
+                          // 1. Be sure to replace Basic xxx with your actual authorization header.
+                          headers: ["Autorizaion": headers_imagga_Authorization]
+        )
+        .responseJSON { response in
+            // 2. Check the response was successful; if not, print the error and call the completion handler.
+            guard response.result.isSuccess else {
+                print("Error while fetching colors: \(response.result.error)")
+                completion([UIColor]())
+                return
+            }
+            // 3. Check each portion of the response, verifying the expected type is the actual type received. 
+            // Retrieve the imageColors information from the response. 
+            // If imageColors cannot be resolved, print out an error message and call the completion handler.
+            guard
+                let responseJSON = response.result.value as? [String: Any],
+                let results = responseJSON["results"] as? [[String: Any]],
+                let firstResult = results.first,
+                let info = firstResult["info"] as? [String: Any],
+                let imageColors = info["image_colors"] as? [[String: Any]] else {
+                    print("Invalid color information received from service")
+                    completion([UIColor]())
+                    return
+            }
+
+            // 4. Using flatMap again, you iterate over the returned imageColors, 
+            // transforming the data into PhotoColor objects which pairs colors in the RGB format with the color name as a string. 
+            // Note the provided closure allows returning nil values since flatMap will simply ignore them.
+            let photoColors = imageColors.flatMap({ (dict) -> UIColor? in
+                guard let r = dict["r"] as? String,
+                    let g = dict["g"] as? String,
+                    let b = dict["b"] as? String,
+                    let closestPaletteColor = dict["closest_palette_colo"] as? String else {
+                        return nil
+                }
+
+                return UIColor(red: Int(r),
+                               green: Int(g),
+                               blue: Int(b),
+                               alpha: <#T##CGFloat#>)
+            })
+
+            completion(photoColors)
+
+        }
     }
 
 }
