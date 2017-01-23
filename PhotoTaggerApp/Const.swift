@@ -11,6 +11,8 @@ import Foundation
 
 /// Imagge API
 let imagga_URL_content = "http://api.imagga.com/v1/content"
-let headers_imagga_Authorization = "Basic "
+let imagga_URL_tagging = "http://api.imagga.com/v1/tagging"
+let imagga_URL_colors = "http://api.imagga.com/v1/colors"
+let headers_imagga_Authorization = "Basic YWNjX2I5MWQ5NzBlNTk0NzQ1MTo4NDk1MDdjYzk3MGI4NjlmMDgwOWFjYTFlZDBhOTZlNw=="
 
 let image_data_failure_JPEG_representation = "Could not get JPEG representation of UIImage"
