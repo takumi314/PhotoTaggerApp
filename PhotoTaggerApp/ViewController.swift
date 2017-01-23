@@ -29,7 +29,7 @@ extension ViewController {
     // Networking calls
     func upload(image: UIImage,
                 progressCompletion: @escaping (_ percent: Float) -> Void,
-                completion: @escaping (_ tags: [String], _ colors: [UIColor]) -> Void) {
+                completion: @escaping (_ tags: [String], _ colors: [PhotoColor]) -> Void) {
         guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {
             print(image_data_failure_JPEG_representation)
             return
@@ -60,7 +60,7 @@ extension ViewController {
                         // 1.Check if the response was successful; if not, print the error and call the completion handler.
                         guard response.result.isSuccess else {
                             print("Error while uploading file: \(response.result.error)")
-                            completion([String](), [UIColor]())
+                            completion([String](), [PhotoColor]())
                             return
                         }
                         // 2.Check each portion of the response, verifying the expected type is the actual type received. 
@@ -72,7 +72,7 @@ extension ViewController {
                             let firstFile = uploadedFiles.first,
                             let firstFileID = firstFile["id"] as? String else {
                                 print("Invalid information received from service")
-                                completion([String](), [UIColor]())
+                                completion([String](), [PhotoColor]())
                                 return
                         }
                         print("Content uploaded with ID: \(firstFileID)")
@@ -83,7 +83,7 @@ extension ViewController {
                             self.downloadColors(contentID: firstFileID) { colors in
                                 completion(tags, colors)
                             }
-//                            completion(tags, [UIColor]())
+//                            completion(tags, [PhotoColor]())
                         }
                     }
                 case .failure(let encodingError):
@@ -131,7 +131,7 @@ extension ViewController {
         }
     }
 
-    func downloadColors(contentID: String, completion: @escaping ([UIColor]) -> Void) {
+    func downloadColors(contentID: String, completion: @escaping ([PhotoColor]) -> Void) {
         Alamofire.request(imagga_URL_colors,
                           method: .get,
                           parameters: ["content": contentID],
@@ -142,7 +142,7 @@ extension ViewController {
             // 2. Check the response was successful; if not, print the error and call the completion handler.
             guard response.result.isSuccess else {
                 print("Error while fetching colors: \(response.result.error)")
-                completion([UIColor]())
+                completion([PhotoColor]())
                 return
             }
             // 3. Check each portion of the response, verifying the expected type is the actual type received. 
@@ -155,14 +155,14 @@ extension ViewController {
                 let info = firstResult["info"] as? [String: Any],
                 let imageColors = info["image_colors"] as? [[String: Any]] else {
                     print("Invalid color information received from service")
-                    completion([UIColor]())
+                    completion([PhotoColor]())
                     return
             }
 
             // 4. Using flatMap again, you iterate over the returned imageColors, 
             // transforming the data into PhotoColor objects which pairs colors in the RGB format with the color name as a string. 
             // Note the provided closure allows returning nil values since flatMap will simply ignore them.
-            let photoColors = imageColors.flatMap({ (dict) -> UIColor? in
+            let photoColors = imageColors.flatMap({ (dict) -> PhotoColor? in
                 guard let r = dict["r"] as? String,
                     let g = dict["g"] as? String,
                     let b = dict["b"] as? String,
@@ -170,10 +170,10 @@ extension ViewController {
                         return nil
                 }
 
-                return UIColor(red: Int(r),
-                               green: Int(g),
-                               blue: Int(b),
-                               alpha: <#T##CGFloat#>)
+                return PhotoColor(red: Int(r),
+                                  green: Int(g),
+                                  blue: Int(b),
+                                  colorName: closestPaletteColor)
             })
 
             completion(photoColors)
