@@ -177,7 +177,6 @@ extension ViewController {
             })
 
             completion(photoColors)
-
         }
     }
 

@@ -81,6 +81,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E1387CCF1E379B2C003C3F4E /* Networks */ = {
+			isa = PBXGroup;
+			children = (
+				E1387CCB1E36713A003C3F4E /* Const.swift */,
+				E1387CCD1E36743D003C3F4E /* ImaggaRouter.swift */,
+			);
+			name = Networks;
+			sourceTree = "<group>";
+		};
+		E1387CD01E379B60003C3F4E /* Entitiese */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Entitiese;
+			sourceTree = "<group>";
+		};
+		E1387CD11E379B89003C3F4E /* ValueObjects */ = {
+			isa = PBXGroup;
+			children = (
+				E1387CC91E366D31003C3F4E /* PhotoColor.swift */,
+			);
+			name = ValueObjects;
+			sourceTree = "<group>";
+		};
 		E19616831E3517D300A6F54E = {
 			isa = PBXGroup;
 			children = (
@@ -104,15 +128,15 @@
 		E196168E1E3517D400A6F54E /* PhotoTaggerApp */ = {
 			isa = PBXGroup;
 			children = (
-				E1387CCB1E36713A003C3F4E /* Const.swift */,
+				E1387CD11E379B89003C3F4E /* ValueObjects */,
+				E1387CD01E379B60003C3F4E /* Entitiese */,
+				E1387CCF1E379B2C003C3F4E /* Networks */,
 				E196168F1E3517D400A6F54E /* AppDelegate.swift */,
 				E19616911E3517D400A6F54E /* ViewController.swift */,
 				E19616931E3517D400A6F54E /* Main.storyboard */,
 				E19616961E3517D400A6F54E /* Assets.xcassets */,
 				E19616981E3517D400A6F54E /* LaunchScreen.storyboard */,
 				E196169B1E3517D400A6F54E /* Info.plist */,
-				E1387CC91E366D31003C3F4E /* PhotoColor.swift */,
-				E1387CCD1E36743D003C3F4E /* ImaggaRouter.swift */,
 			);
 			path = PhotoTaggerApp;
 			sourceTree = "<group>";
