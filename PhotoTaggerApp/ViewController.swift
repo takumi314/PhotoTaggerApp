@@ -42,29 +42,23 @@ extension ViewController {
                                          fileName: "image.jpg",
                                          mimeType: "image/jpeg")
         },
-            to: imagga_URL_content,
-            headers: ["Authorization": headers_imagga_Authorization],
+            with: ImaggaRouter.content,
             encodingCompletion: { encodingResult in
-
                 switch encodingResult {
                 case .success(let upload, _, _):
-                    upload
-                        .uploadProgress { progress in
+                    upload.uploadProgress { progress in
                         progressCompletion(Float(progress.fractionCompleted))
                     }
-                    upload
-                        .validate()
-                        .validate()
-                    upload
-                        .responseJSON { response in
+                    upload.validate()
+                    upload.responseJSON { response in
                         // 1.Check if the response was successful; if not, print the error and call the completion handler.
                         guard response.result.isSuccess else {
                             print("Error while uploading file: \(response.result.error)")
                             completion([String](), [PhotoColor]())
                             return
                         }
-                        // 2.Check each portion of the response, verifying the expected type is the actual type received. 
-                        // Retrieve the firstFileID from the response. If firstFileID cannot be resolved, print out an error message 
+                        // 2.Check each portion of the response, verifying the expected type is the actual type received.
+                        // Retrieve the firstFileID from the response. If firstFileID cannot be resolved, print out an error message
                         // and call the completion handler.
                         guard
                             let responseJSON = response.result.value as? [String: Any],
@@ -76,31 +70,27 @@ extension ViewController {
                                 return
                         }
                         print("Content uploaded with ID: \(firstFileID)")
-                        // 3.Call the completion handler to update the UI. 
+                        // 3.Call the completion handler to update the UI.
                         // At this point, you don’t have any downloaded tags or colors,
                         // so simply call this with empty data.
                         self.downloadTags(contentID: firstFileID) { tags in
                             self.downloadColors(contentID: firstFileID) { colors in
                                 completion(tags, colors)
                             }
-//                            completion(tags, [PhotoColor]())
+                            completion(tags, [PhotoColor]())
                         }
                     }
                 case .failure(let encodingError):
-                    print(encodingError)
+                print(encodingError)
                 }
-        }
+            }
         )
     }
 
     func downloadTags(contentID: String, completion: @escaping ([String]) -> Void) {
         Alamofire
-            .request(imagga_URL_tagging,
-                     method: .get,
-                     parameters: ["content": contentID],
-                     headers: ["Authorizzation": headers_imagga_Authorization]
-        )
-        .responseJSON { response in
+            .request(ImaggaRouter.tags(contentID))
+            .responseJSON { response in
             // 1. Check if the response was successful; if not, print the error and call the completion handler.
             guard response.result.isSuccess else {
                 print("Error while fetching tags: \(response.result.error)")
@@ -119,26 +109,20 @@ extension ViewController {
                 completion([String]())
                 return
             }
-
             // 3. Iterate over each dictionary object in the tagsAndConfidences array, 
             // retrieving the value associated with the tag key.
             let tags = tagsAndConfidences.flatMap({ dict in
                 return dict["tags"] as? String
             })
-
             // 4. Call the completion handler passing in the tags received from the service.
             completion(tags)
         }
     }
 
     func downloadColors(contentID: String, completion: @escaping ([PhotoColor]) -> Void) {
-        Alamofire.request(imagga_URL_colors,
-                          method: .get,
-                          parameters: ["content": contentID],
-                          // 1. Be sure to replace Basic xxx with your actual authorization header.
-                          headers: ["Autorizaion": headers_imagga_Authorization]
-        )
-        .responseJSON { response in
+        Alamofire
+            .request(ImaggaRouter.colors(contentID))
+            .responseJSON { response in
             // 2. Check the response was successful; if not, print the error and call the completion handler.
             guard response.result.isSuccess else {
                 print("Error while fetching colors: \(response.result.error)")
@@ -158,7 +142,6 @@ extension ViewController {
                     completion([PhotoColor]())
                     return
             }
-
             // 4. Using flatMap again, you iterate over the returned imageColors, 
             // transforming the data into PhotoColor objects which pairs colors in the RGB format with the color name as a string. 
             // Note the provided closure allows returning nil values since flatMap will simply ignore them.
@@ -169,13 +152,11 @@ extension ViewController {
                     let closestPaletteColor = dict["closest_palette_colo"] as? String else {
                         return nil
                 }
-
                 return PhotoColor(red: Int(r),
                                   green: Int(g),
                                   blue: Int(b),
                                   colorName: closestPaletteColor)
             })
-
             completion(photoColors)
         }
     }

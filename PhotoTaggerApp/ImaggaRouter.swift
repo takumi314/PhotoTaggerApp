@@ -37,6 +37,12 @@ public enum ImaggaRouter: URLRequestConvertible {
         }
     }
 
+    /// Types adopting the `URLRequestConvertible` protocol can be used to construct URL requests.
+    /// Returns a URL request or throws if an `Error` was encountered.
+    ///
+    /// - throws: An `Error` if the underlying `URLRequest` is `nil`.
+    ///
+    /// - returns: A URL request.
     public func asURLRequest() throws -> URLRequest {
         let parameters: [String: Any] = {
             switch self {
