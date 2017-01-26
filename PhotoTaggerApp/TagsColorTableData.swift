@@ -6,4 +6,9 @@
 //  Copyright © 2017年 Kohey. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct TagsColorTableData {
+    var label: String
+    var color: UIColor?
+}
