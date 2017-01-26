@@ -11,6 +11,16 @@ import Alamofire
 
 class ViewController: UIViewController {
 
+    // MARK: - IBOutlets
+    @IBOutlet var takePictureButton: UIButton!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var progressView: UIProgressView!
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
+
+    // MARK: - Properties
+    internal var tags: [String]?
+    internal var colors: [PhotoColor]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
