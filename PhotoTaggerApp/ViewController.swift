@@ -11,9 +11,27 @@ import Alamofire
 
 class ViewController: UIViewController {
 
+    // MARK: - IBOutlets
+    @IBOutlet var takePictureButton: UIButton!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var progressView: UIProgressView!
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
+
+    // MARK: - Properties
+    internal var tags: [String]?
+    internal var colors: [PhotoColor]?
+
+    // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        guard !UIImagePickerController.isSourceTypeAvailable(.camera) else { return }   // ??
+        takePictureButton.setTitle("Select Photo", for: .normal)                        // ??
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        imageView.image = nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,9 +39,51 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - Navigation
+    // 画面遷移の処理
+
+
+    // MARK: - IBActions
+    @IBAction func takePicture(_ sender: UIButton) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = false
+
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+        } else {
+            picker.sourceType = .photoLibrary
+            picker.modalPresentationStyle = .fullScreen
+        }
+        
+        present(picker, animated: true)
+    }
 
 }
 
+// MARK: - UIImagePickerControllerDelegate
+extension ViewController: UIImagePickerControllerDelegate {
+
+    public func imagePickerController(_ picker: UIImagePickerController,
+                                      didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            print("Info did not have the required UIImage for the Original Image")
+            dismiss(animated: true, completion: nil)
+            return
+        }
+        imageView.image = image
+
+        dismiss(animated: true, completion: nil)
+    }
+
+}
+
+// MARK: - UINavigationControllerDelegate
+extension ViewController: UINavigationControllerDelegate {
+
+}
+
+// MARK: - Alamofire
 extension ViewController {
 
     // Networking calls
