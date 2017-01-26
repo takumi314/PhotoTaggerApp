@@ -24,7 +24,9 @@ class ViewController: UIViewController {
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        guard !UIImagePickerController.isSourceTypeAvailable(.camera) else { return }   // ??
+        takePictureButton.setTitle("Select Photo", for: .normal)                        // ??
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -38,6 +40,7 @@ class ViewController: UIViewController {
     }
 
     // MARK: - Navigation
+    // 画面遷移の処理
 
 
     // MARK: - IBActions
