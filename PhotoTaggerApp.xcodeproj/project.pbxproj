@@ -12,6 +12,7 @@
 		E1387CCA1E366D31003C3F4E /* PhotoColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1387CC91E366D31003C3F4E /* PhotoColor.swift */; };
 		E1387CCC1E36713A003C3F4E /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1387CCB1E36713A003C3F4E /* Const.swift */; };
 		E1387CCE1E36743D003C3F4E /* ImaggaRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1387CCD1E36743D003C3F4E /* ImaggaRouter.swift */; };
+		E149BFBF1E3A6479009A41C3 /* TagsColorTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E149BFBE1E3A6479009A41C3 /* TagsColorTableData.swift */; };
 		E19616901E3517D400A6F54E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E196168F1E3517D400A6F54E /* AppDelegate.swift */; };
 		E19616921E3517D400A6F54E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19616911E3517D400A6F54E /* ViewController.swift */; };
 		E19616951E3517D400A6F54E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E19616931E3517D400A6F54E /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		E1387CC91E366D31003C3F4E /* PhotoColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoColor.swift; sourceTree = "<group>"; };
 		E1387CCB1E36713A003C3F4E /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		E1387CCD1E36743D003C3F4E /* ImaggaRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImaggaRouter.swift; sourceTree = "<group>"; };
+		E149BFBE1E3A6479009A41C3 /* TagsColorTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsColorTableData.swift; sourceTree = "<group>"; };
 		E196168C1E3517D400A6F54E /* PhotoTaggerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTaggerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E196168F1E3517D400A6F54E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E19616911E3517D400A6F54E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		E1387CD01E379B60003C3F4E /* Entitiese */ = {
 			isa = PBXGroup;
 			children = (
+				E149BFBE1E3A6479009A41C3 /* TagsColorTableData.swift */,
 			);
 			name = Entitiese;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				E1387CCA1E366D31003C3F4E /* PhotoColor.swift in Sources */,
 				E1387CCE1E36743D003C3F4E /* ImaggaRouter.swift in Sources */,
 				E1387CCC1E36713A003C3F4E /* Const.swift in Sources */,
+				E149BFBF1E3A6479009A41C3 /* TagsColorTableData.swift in Sources */,
 				E19616921E3517D400A6F54E /* ViewController.swift in Sources */,
 				E19616901E3517D400A6F54E /* AppDelegate.swift in Sources */,
 			);
