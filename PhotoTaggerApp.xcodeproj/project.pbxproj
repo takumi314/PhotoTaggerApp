@@ -12,6 +12,8 @@
 		E1387CCA1E366D31003C3F4E /* PhotoColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1387CC91E366D31003C3F4E /* PhotoColor.swift */; };
 		E1387CCC1E36713A003C3F4E /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1387CCB1E36713A003C3F4E /* Const.swift */; };
 		E1387CCE1E36743D003C3F4E /* ImaggaRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1387CCD1E36743D003C3F4E /* ImaggaRouter.swift */; };
+		E149BFC41E3A66F4009A41C3 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E149BFC31E3A66F4009A41C3 /* ListTableViewController.swift */; };
+		E149BFC61E3A6731009A41C3 /* TagsColorsShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E149BFC51E3A6731009A41C3 /* TagsColorsShowViewController.swift */; };
 		E19616901E3517D400A6F54E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E196168F1E3517D400A6F54E /* AppDelegate.swift */; };
 		E19616921E3517D400A6F54E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19616911E3517D400A6F54E /* ViewController.swift */; };
 		E19616951E3517D400A6F54E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E19616931E3517D400A6F54E /* Main.storyboard */; };
@@ -40,6 +42,8 @@
 		E1387CC91E366D31003C3F4E /* PhotoColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoColor.swift; sourceTree = "<group>"; };
 		E1387CCB1E36713A003C3F4E /* Const.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		E1387CCD1E36743D003C3F4E /* ImaggaRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImaggaRouter.swift; sourceTree = "<group>"; };
+		E149BFC31E3A66F4009A41C3 /* ListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		E149BFC51E3A6731009A41C3 /* TagsColorsShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsColorsShowViewController.swift; sourceTree = "<group>"; };
 		E196168C1E3517D400A6F54E /* PhotoTaggerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTaggerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E196168F1E3517D400A6F54E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E19616911E3517D400A6F54E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +109,30 @@
 			name = ValueObjects;
 			sourceTree = "<group>";
 		};
+		E149BFC01E3A661D009A41C3 /* Usecases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Usecases;
+			sourceTree = "<group>";
+		};
+		E149BFC11E3A6627009A41C3 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		E149BFC21E3A6634009A41C3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E149BFC31E3A66F4009A41C3 /* ListTableViewController.swift */,
+				E19616911E3517D400A6F54E /* ViewController.swift */,
+				E149BFC51E3A6731009A41C3 /* TagsColorsShowViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		E19616831E3517D300A6F54E = {
 			isa = PBXGroup;
 			children = (
@@ -128,11 +156,13 @@
 		E196168E1E3517D400A6F54E /* PhotoTaggerApp */ = {
 			isa = PBXGroup;
 			children = (
+				E149BFC21E3A6634009A41C3 /* ViewControllers */,
+				E149BFC11E3A6627009A41C3 /* Presenter */,
+				E149BFC01E3A661D009A41C3 /* Usecases */,
 				E1387CD11E379B89003C3F4E /* ValueObjects */,
 				E1387CD01E379B60003C3F4E /* Entitiese */,
 				E1387CCF1E379B2C003C3F4E /* Networks */,
 				E196168F1E3517D400A6F54E /* AppDelegate.swift */,
-				E19616911E3517D400A6F54E /* ViewController.swift */,
 				E19616931E3517D400A6F54E /* Main.storyboard */,
 				E19616961E3517D400A6F54E /* Assets.xcassets */,
 				E19616981E3517D400A6F54E /* LaunchScreen.storyboard */,
@@ -370,6 +400,8 @@
 				E1387CCA1E366D31003C3F4E /* PhotoColor.swift in Sources */,
 				E1387CCE1E36743D003C3F4E /* ImaggaRouter.swift in Sources */,
 				E1387CCC1E36713A003C3F4E /* Const.swift in Sources */,
+				E149BFC61E3A6731009A41C3 /* TagsColorsShowViewController.swift in Sources */,
+				E149BFC41E3A66F4009A41C3 /* ListTableViewController.swift in Sources */,
 				E19616921E3517D400A6F54E /* ViewController.swift in Sources */,
 				E19616901E3517D400A6F54E /* AppDelegate.swift in Sources */,
 			);
