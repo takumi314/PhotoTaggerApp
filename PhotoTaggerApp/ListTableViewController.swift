@@ -13,7 +13,7 @@ class ListTableViewController: UITableViewController {
     // MARK: - IBOulets
 
     // MARK: - Properties
-    var data = [AnyObject]()
+    var data = [TagsColorTableData]()
 
     // MARK: - Life cycle
 
@@ -30,11 +30,11 @@ extension ListTableViewController {
         return 1
     }
 
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cellData = data[indexPath.row]
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "TagOrColorCell", for: indexPath)
-//        cell.textLabel?.text = cellData.label
-//        return cell
-//    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellData = data[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TagOrColorCell", for: indexPath)
+        cell.textLabel?.text = cellData.label
+        return cell
+    }
 
 }
