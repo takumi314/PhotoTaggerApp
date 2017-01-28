@@ -33,33 +33,40 @@ class TagsColorsViewController: UIViewController {
     }
 
     // MARK: - Public
-    func setupTableData() {
+
+    // MARK: - Private
+    private func setupTableData() {
         if segmentedControl.selectedSegmentIndex == 0 {
-
-            if let tags = tags {
-                tableViewController?.data = tags.map {
-                    TagsColorTableData(label: $0, color: nil)
-                }
-            } else {
-                tableViewController?.data = [TagsColorTableData(label: "No tags were fetched.", color: nil)]
-            }
-
+            setupTableDataOfTags()
         } else {
-            if let colors = colors {
-                tableViewController?.data
-                    = colors.map({ (photoColor: PhotoColor) -> TagsColorTableData in
-                                    let uicolor = UIColor(red: CGFloat(photoColor.red!) / 255,
-                                                          green: CGFloat(photoColor.green!) / 255,
-                                                          blue: CGFloat(photoColor.blue!) / 255,
-                                                          alpha: 1.0)
-                                        return TagsColorTableData(label: photoColor.colorName!, color: uicolor)
-                })
-            } else {
-                tableViewController?.data = [TagsColorTableData(label: "No colors were fetched.", color: nil)]
-            }
+            setupTableDataOfColors()
         }
-        
         tableViewController?.tableView.reloadData()
+    }
+
+    private func setupTableDataOfTags() {
+        if let tags = tags {
+            tableViewController?.data = tags.map {
+                TagsColorTableData(label: $0, color: nil)
+            }
+        } else {
+            tableViewController?.data = [TagsColorTableData(label: "No tags were fetched.", color: nil)]
+        }
+    }
+
+    private func setupTableDataOfColors() {
+        if let colors = colors {
+            tableViewController?.data
+                = colors.map({ (photoColor: PhotoColor) -> TagsColorTableData in
+                    let uicolor = UIColor(red: CGFloat(photoColor.red!) / 255,
+                                          green: CGFloat(photoColor.green!) / 255,
+                                          blue: CGFloat(photoColor.blue!) / 255,
+                                          alpha: 1.0)
+                    return TagsColorTableData(label: photoColor.colorName!, color: uicolor)
+                })
+        } else {
+            tableViewController?.data = [TagsColorTableData(label: "No colors were fetched.", color: nil)]
+        }
     }
 
 }
